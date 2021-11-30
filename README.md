@@ -2,7 +2,7 @@
 This Application allows users to manage their tasks.
 
 # APIs
-please review the file `./task-manager-openapi.yaml`
+please review the file `./task-manager-openapi.pdf` & `./task-manager-openapi.yaml`
 
 # Features
 1. Create/manage your own account
