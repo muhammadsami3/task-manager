@@ -2,7 +2,7 @@
 This Application allows users to manage their tasks.
 
 # APIs
-please review the file `./task-manager-openapi.pdf` & `./task-manager-openapi.yaml`
+Review the file `./task-manager-openapi.pdf` or `./task-manager-openapi.yaml`
 
 # Features
 1. Create/manage your own account
@@ -15,8 +15,13 @@ please review the file `./task-manager-openapi.pdf` & `./task-manager-openapi.ya
 # run
 
 1. Start the database
- ```
+ ```bash
  mkdir /tmp/mongodb_data
  ~/mongodb/bin/mongod --dbpath=/tmp/mongodb_data
 
  ```
+2. Start the server
+```bash
+npm run start
+```
+
