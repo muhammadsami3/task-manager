@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const JWT_SECRET = 'mysecret'
+const JWT_SECRET = process.env.JWT_SECRET
 
 const Task = require('./task')
 
@@ -51,7 +51,10 @@ const userSchema = new mongoose.Schema({
             type: String,
             required: true
         }
-    }]
+    }],
+    avatar:{
+        type: Buffer
+    }
 
 }, { timestamps: true 
 })
@@ -71,6 +74,7 @@ userSchema.methods.toJSON = function () {
 
     delete userObject.password
     delete userObject.tokens
+    delete userObject.avatar
 
 
     return userObject
@@ -83,8 +87,6 @@ userSchema.methods.getToken = async function () {
     const token = jwt.sign({ _id: user._id.toString() }, JWT_SECRET)
     user.tokens = user.tokens.concat({ token })
     await user.save()
-
-    console.log(token);
     return token
 }
 userSchema.statics.findByCredentials = async (email, password) => {
@@ -93,11 +95,7 @@ userSchema.statics.findByCredentials = async (email, password) => {
 
     if (!user) throw new Error('email not found')
 
-    console.log("user.password", user.password, password);
-
     const isValidPassword = bcrypt.compareSync(password, user.password)
-
-    console.log(isValidPassword);
 
     if (!isValidPassword) throw new Error("invalid email or password")
 
@@ -114,7 +112,6 @@ userSchema.statics.doesExist = async (email) => {
 userSchema.pre('save', async function (next) {
 
     const user = this
-    console.log("before saving ");
 
     if (user.isModified('password')) {
 
@@ -129,7 +126,6 @@ userSchema.pre('save', async function (next) {
 userSchema.pre('remove', async function (next) {
 
     const user = this
-    console.log("before delete");
 
     await Task.deleteMany({ owner: user._id })
 

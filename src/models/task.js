@@ -15,7 +15,6 @@ const taskSchema = new mongoose.Schema({
 taskSchema.pre('save', async function (next) {
 
     const task = this
-    console.log("before saving task ");
 
     next()
 })

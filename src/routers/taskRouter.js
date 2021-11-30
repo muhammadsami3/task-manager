@@ -57,7 +57,6 @@ router.get('/tasks', auth, async (req, res) => {
 
         if (req.query.sortBy) {
             const sortByParts = req.query.sortBy.split(':')
-            console.log(sortByParts);
             sort[sortByParts[0]] = sortByParts[1] === 'desc' ? -1 : 1
             options.sort = sort
         }
@@ -79,10 +78,7 @@ router.get('/tasks/:id', auth, async (req, res) => {
     const _id = req.params.id
 
     try {
-
-        // const task = await Task.findById(__id)
-        const task = await Task.findOne({ _id, owner: req.user._id })
-        console.log('req.user._id', req.user._id);
+        const task = await Task.findOne({ _id, owner: req.user._id })  
         if (!task) {
             return res.status(404).send()
         }
