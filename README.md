@@ -31,6 +31,7 @@ You can start the server using the following command. Make sure to swap out
 ```
 3. Start the server
 ```bash
+npm install
 npm run start
 ```
 
