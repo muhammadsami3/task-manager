@@ -14,7 +14,7 @@ Review the file `./task-manager-openapi.pdf` or `./task-manager-openapi.yaml`
 2. Create/update/delete your tasks from your account
 
 
-# run
+# Running the Application
 1. install MongoDb
 You can download the MongoDB Community Server from the [MongoDB download page](https://www.mongodb.com/download-center/community).
 The download is a zip file. Unzip the contents, change the folder name to “mongodb”, and
